@@ -1,10 +1,14 @@
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import ThemeToggler from './themeToggler';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(true);
   const currentRoute = useRouter().pathname;
+  const { systemTheme, theme, setTheme } = useTheme();
+  const currentTheme = theme === 'system' ? systemTheme : theme;
 
   const openMenu = () => {
     setMenuOpen(!menuOpen);
@@ -83,27 +87,12 @@ export default function Navbar() {
           </ul>
           <div className='ml-5'>
             {/* Night mode icon */}
-            <button className='p-2 border rounded hover:bg-[#eaecfa] transition-colors duration-300 ease-in-out'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='h-6 w-6'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z'
-                />
-              </svg>
-            </button>
+            <ThemeToggler currentTheme={currentTheme} setTheme={setTheme} />
           </div>
           <div className='block md:hidden z-20 ml-4'>
             {/* Hamburger icon */}
             <button
-              className='flex items-center p-2 border rounded text-primary border-primary outline-none focus:outline-none'
+              className='p-2 border rounded text-primary border-primary outline-none focus:outline-none'
               onClick={openMenu}
             >
               <svg
