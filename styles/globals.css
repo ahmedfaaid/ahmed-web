@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .blog-post-card .hovered-image {
+    border: 3px solid transparent;
+  }
+
+  .blog-post-card:hover .hovered-image {
+    @apply border-primary;
+  }
+
+  .latest-posts-card:hover .hovered-link {
+    @apply text-primary;
+  }
+}
