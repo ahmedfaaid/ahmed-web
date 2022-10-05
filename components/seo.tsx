@@ -21,6 +21,11 @@ export default function SEO({ title, description, image, article }: SEOProps) {
 
   return (
     <Head>
+      {title ? (
+        <title>{title} - Ahmed Faaid</title>
+      ) : (
+        <title>Ahmed Faaid</title>
+      )}
       <meta name='description' content={description || defaultDescription} />
       <meta name='image' content={`${siteUrl}/${image || defaultImage}`} />
       <meta name='twitter:card' content='summary' />
