@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Header from './Header';
+import Header from './header';
 import SEO from './seo';
 
 interface LayoutProps {
