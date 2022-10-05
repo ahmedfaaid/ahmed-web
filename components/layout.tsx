@@ -27,7 +27,9 @@ export default function Layout({
       />
       <div className='bg-background dark:bg-background-dark'>
         <Header />
-        <main>{children}</main>
+        <div className='container pb-16'>
+          <main>{children}</main>
+        </div>
       </div>
     </>
   );

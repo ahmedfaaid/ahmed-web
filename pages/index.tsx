@@ -1,10 +1,13 @@
+import Hero from 'components/hero';
 import Layout from 'components/layout';
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <h1 className='text-4xl'>Hello</h1>
+      <section className='mt-10 sm:mt-24'>
+        <Hero />
+      </section>
     </Layout>
   );
 };

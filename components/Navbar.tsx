@@ -35,7 +35,7 @@ export default function Navbar() {
           <ul
             className={`md:flex text-2xl font-light ${
               menuOpen ? 'block' : 'hidden'
-            } w-max absolute md:static bg-primary md:bg-transparent top-20 right-0 p-4 rounded text-white md:text-black dark:md:text-white`}
+            } w-max absolute z-20 md:static bg-primary md:bg-transparent top-20 right-0 p-4 rounded text-white md:text-black dark:md:text-white`}
           >
             <li className='mb-5 md:mb-0 md:mr-5'>
               <Link href='/blog'>
