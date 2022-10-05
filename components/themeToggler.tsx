@@ -1,16 +1,20 @@
 interface ThemeTogglerProps {
   currentTheme: string | undefined;
   setTheme: (theme: string) => void;
+  mounted: boolean;
 }
 
 export default function ThemeToggler({
   currentTheme,
-  setTheme
+  setTheme,
+  mounted
 }: ThemeTogglerProps) {
+  if (!mounted) return null;
+
   if (currentTheme === 'dark') {
     return (
       <button
-        className='p-2 border rounded hover:bg-[#eaecfa] transition-colors duration-300 ease-in-out'
+        className='p-2 border rounded hover:bg-[#121852] transition-colors duration-300 ease-in-out'
         onClick={() => setTheme('light')}
       >
         <svg

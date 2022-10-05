@@ -25,7 +25,7 @@ export default function Layout({
         image={image}
         article={article}
       />
-      <div className='bg-background'>
+      <div className='bg-background dark:bg-background-dark'>
         <Header />
       </div>
     </>

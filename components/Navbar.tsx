@@ -1,14 +1,19 @@
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ThemeToggler from './themeToggler';
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const currentRoute = useRouter().pathname;
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const openMenu = () => {
     setMenuOpen(!menuOpen);
@@ -30,7 +35,7 @@ export default function Navbar() {
           <ul
             className={`md:flex text-2xl font-light ${
               menuOpen ? 'block' : 'hidden'
-            } w-max absolute md:static bg-primary md:bg-transparent top-20 right-0 p-4 rounded text-white md:text-black`}
+            } w-max absolute md:static bg-primary md:bg-transparent top-20 right-0 p-4 rounded text-white md:text-black dark:md:text-white`}
           >
             <li className='mb-5 md:mb-0 md:mr-5'>
               <Link href='/blog'>
@@ -87,12 +92,16 @@ export default function Navbar() {
           </ul>
           <div className='ml-5'>
             {/* Night mode icon */}
-            <ThemeToggler currentTheme={currentTheme} setTheme={setTheme} />
+            <ThemeToggler
+              currentTheme={currentTheme}
+              setTheme={setTheme}
+              mounted={mounted}
+            />
           </div>
           <div className='block md:hidden z-20 ml-4'>
             {/* Hamburger icon */}
             <button
-              className='p-2 border rounded text-primary border-primary outline-none focus:outline-none'
+              className='p-2 border rounded text-primary border-primary dark:text-white dark:border-white outline-none focus:outline-none'
               onClick={openMenu}
             >
               <svg
