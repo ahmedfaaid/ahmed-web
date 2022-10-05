@@ -27,7 +27,7 @@ export default function Layout({
       />
       <div className='bg-background dark:bg-background-dark'>
         <Header />
-        <div className='container pb-16'>
+        <div className='container pb-8'>
           <main>{children}</main>
         </div>
       </div>
