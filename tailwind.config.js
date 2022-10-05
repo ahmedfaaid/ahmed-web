@@ -4,6 +4,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}'
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       container: {
@@ -15,7 +16,10 @@ module.exports = {
       },
       colors: {
         primary: '#2C3CCC',
-        background: '#F6F6F6',
+        background: {
+          DEFAULT: '#F6F6F6',
+          dark: '#040614'
+        },
         offWhite: '#E5E5E5',
         lightBlack: '#D9D9D9',
         twitter: {
