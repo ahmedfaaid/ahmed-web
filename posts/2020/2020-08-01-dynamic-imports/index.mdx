@@ -1,0 +1,198 @@
+---
+title: Importing a Browser Only Package Into Next.js
+description: How to import a package that only works in the browser into Next.js
+image:
+  {
+    path: './chuttersnap-fN603qcEA7g-unsplash.jpg',
+    creator: 'chuttersnap',
+    externalLink: 'https://unsplash.com/photos/fN603qcEA7g'
+  }
+embeddedImagesLocal: { paths: ['./nossr1.png', './nossr2.png'] }
+publishedAt: 2020-08-01
+published: true
+---
+
+I find myself reaching for Next.js everytime I need to prototype an idea or start building a new side project. Next provides structure for building your app and comes prebundled with routing and code spliting. The main feature of Next is Server Side Rendering or SSR allowing your site/app's HTML to be rendered on the server and displayed in your browser. This has its pros and cons but I am not here to discuss the benefits of SSR.
+
+Sometimes there are packages and/or libraries we would want to include in our application that cannot be rendered on the server. With these pieces of code, we need let the browser do the rendering. Next uses ES2020's `dynamic import()` feature to basically split code and disable the SSR.
+
+In this blog, we will try to use [Apex Charts](https://apexcharts.com/), a client side rendered chart library, within a Next.js server side rendered app. Lets get started.
+
+### Creating The app
+
+We will create an app using `create-next-app` which will set everything up for us. We'll name our app `nossr`. In your terminal lets run:
+
+```bash
+$ npx create-next-app nossr
+```
+
+After its done installing, go into the nossr folder by running `cd nossr` and install the apexcharts and react-apexcharts packages
+
+```bash
+$ npm install --save react-apexcharts apexcharts
+```
+
+After its all done installing, we can open the folder in our text editor.
+
+In our `/pages/index.js` file we will replace everything with the following:
+
+```javascript
+import Head from 'next/head';
+
+export default function Home() {
+  return (
+    <div className='container'>
+      <Head>
+        <title>No SSR Charts</title>
+      </Head>
+
+      <main>
+        <h1 className='title'>Our Chart</h1>
+
+        <p>The chart goes here</p>
+      </main>
+
+      <style jsx>{`
+        .container {
+          min-height: 100vh;
+          padding: 0 0.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        main {
+          padding: 5rem 0;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        .title {
+          margin: 0;
+          line-height: 1.15;
+          font-size: 4rem;
+          text-align: center;
+        }
+      `}</style>
+
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+    </div>
+  );
+}
+```
+
+Now run the server using `npm run dev` and open the site in your browser at `https://localhost:3000`.
+
+Your page should look like this:
+
+<Image src={props.embeddedImagesLocal[0]} alt='Page without the chart' />
+
+### Chart Component
+
+Now we will create our map component. Lets create a folder called `components` and then create a file in the components folder called `MyChart.js`. Add the following to that file:
+
+```javascript
+import React, { useState } from 'react';
+import Chart from 'react-apexcharts';
+
+export default function MyChart() {
+  const [options, setOptions] = useState({
+    chart: {
+      id: 'line-chart'
+    },
+    xaxis: {
+      categories: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ]
+    }
+  });
+  const [series, setSeries] = useState([
+    {
+      name: 'Hours of Sleep',
+      data: [4.4, 3.5, 5.0, 4.2, 6.8, 8.1, 8.3]
+    }
+  ]);
+
+  return (
+    <div className='chart'>
+      <Chart options={options} series={series} type='line' />
+
+      <style jsx>{`
+        .chart {
+          width: 500px;
+          margin: auto;
+        }
+      `}</style>
+    </div>
+  );
+}
+```
+
+Lets import the chart component into `/pages/index.js` under the first import like so:
+
+```javascript
+import Head from 'next/head';
+import MyChart from '../components/MyChart';
+```
+
+and replace
+
+```javascript
+<p>The chart goes here</p>
+```
+
+with
+
+```javascript
+<MyChart />
+```
+
+After reloading the page, we should run into a `GET http://localhost:3000/ 500 (Internal Server Error)`. We get this error because the `apexcharts` and `react-apexcharts` packages refer to the window object which is only available on the client(browser). What we want to do is to prevent the `react-apexcharts` from being imported on the server with `dynamic import`.
+
+Lets go back to the `MyChart.js` component. We want to replace
+
+```javascript
+import Chart from 'react-apexcharts';
+```
+
+with
+
+```javascript
+import dynamic from 'next/dynamic';
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+```
+
+Now restart your server and reload the page in the browser. Voila! The page should look like this:
+
+<Image src={props.embeddedImagesLocal[0]} alt='Page with the chart' />
+
+### Conclusion
+
+Using Next.js for your project gives you all the benefits of a server side rendered application but also gives you the option to use packages and/or libraries that can only be client side rendered. Learn more about Next.js `Dynamic Import` [here](https://nextjs.org/docs/advanced-features/dynamic-import) and ES2020's `dynamic import()` [here](https://v8.dev/features/dynamic-import).

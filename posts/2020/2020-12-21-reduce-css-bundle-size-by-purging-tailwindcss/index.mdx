@@ -1,0 +1,139 @@
+---
+title: Reduce Your CSS Bundle Size When Using TailwindCSS
+description: How to purge unused CSS when using TailwindCSS to reduce bundle size
+image:
+  {
+    path: './ruben-bagues-ZzApzgh5lxo-unsplash.jpg',
+    creator: 'Rubén Bagüés',
+    externalLink: 'https://unsplash.com/photos/ZzApzgh5lxo'
+  }
+embeddedImagesLocal:
+  {
+    paths:
+      [
+        './portfolio-unpurged.png',
+        './sneak-unpurged.png',
+        './portfolio-purged.png',
+        './sneak-purged.png'
+      ]
+  }
+publishedAt: 2020-12-21
+published: true
+---
+
+TailwindCSS is a utility-first framework which generates CSS classes based on a configuration file. It is sort of an alternative to Bootstrap or MaterialUI.
+
+<br />
+
+I have a couple of websites built using TailwindCSS. One of them is my <a href='https://ahmedfaaid.com' target='_blank'>personal portfolio website</a> and the other is a <a href='https://sneakersseur.netlify.app' target='_blank'>sneaker news website</a>.
+
+<br />
+
+The problem with TailwindCSS is when you build your project in production, all the generated classes(even the unused ones) are also bundled with the project. This can inflate your bundle sizes and affect the load times for your website especially when your website is client side rendered. This could have many different implications including increased bounce rate and reduced performance.
+
+<br />
+
+I decided to do a little bit of research about the file sizes for the TailwindCSS generated styles. Take a look at these 2 images:
+
+<br />
+
+<Image src={props.embeddedImagesLocal[0]} alt='Unpurged portfolio styles' />
+
+<br />
+
+<Image
+  src={props.embeddedImagesLocal[1]}
+  alt='Unpurged sneaker website styles'
+/>
+
+<br />
+
+These are the style files that are generated at build time. I want you to notice a few things here. So much code(yes it is minified) and **LOOK AT THE FILE SIZES**. 1.7MB and 1MB respectively. That is a lot for a browser to download and render along with the bundled JavaScript.
+
+<br />
+
+## Purging CSS
+
+TailwindCSS gives you the option to purge the unused CSS that is generated so that it is not added to the final build. In my personal portfolio, I use <a href='https://purgecss.com' target='_blank'>purgecss</a> to remove the unused styles and classes. Here is my config file.
+
+<br />
+
+```javascript
+/* postcss.config.js */
+
+const tailwindcss = require('tailwindcss');
+
+module.exports = {
+  plugins: [
+    require('tailwindcss')('tailwind.config.js'),
+    require('autoprefixer')(),
+    process.env.NODE_ENV === 'production' &&
+      require('@fullhuman/postcss-purgecss')({
+        content: ['./src/**/*.js', './public/**/*.html'],
+        defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || []
+      })
+  ]
+};
+```
+
+<br />
+
+Here, I add purgecss to the postcss configuration _but_, it is only active in the production enviroment. I want access to all generated styles in my development environment.
+
+<br />
+
+In the sneaker news website, I use <a href='https://www.gatsbyjs.com/plugins/gatsby-plugin-purgecss/' target='_blank'>gatsby-plugin-purgecss</a>. Here is my config:
+
+<br />
+
+```javascript
+/* gatsby-config.js */
+
+module.exports = {
+  plugins: [
+    `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        tailwind: true,
+        ignore: ['react-responsive-carousel'],
+        develop: false
+      }
+    }
+  ]
+};
+```
+
+<br />
+
+Here, I pass tailwind as an option to let the plugin know what I built the website with. I also ignore `react-responsive-carousel` which is a package that gives me an easy carousel component. I do not want any of the styles associated with this package to be purged.
+
+<br />
+
+## After The Purge
+
+Look at these images after purging the css:
+
+<br />
+
+<Image src={props.embeddedImagesLocal[2]} alt='Purged portfolio styles' />
+
+<br />
+
+<Image src={props.embeddedImagesLocal[2]} alt='Purged sneaker website styles' />
+
+<br />
+
+Take a look at how much code has been removed and **LOOK AT THE FILE SIZES**. 7.25KB and 12.69KB respectively. That is a significant reduction and an easier download for the browser.
+
+## Conclusion
+
+To sum up, TailwindCSS is a very valuable tool for building your projects fast but you shouldn't ship everything that it generates. You should only include the CSS that is actually used by your project. Using the solutions above are some of the ways to remove all the unused CSS that TailwindCSS generates.
+
+<br />
+
+These solutions however aren't specific to TailwindCSS and can be used to remove any classes or styles that aren't active when the website is built.
+
+<br />
+
+Hopefully you find this helpful and applicable to your projects.
