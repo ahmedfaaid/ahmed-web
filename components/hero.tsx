@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Jump from 'public/images/Saly-34.svg';
+import Jump from 'public/images/hero/Saly-34.svg';
 import SocialButton from './socialButton';
 
 export default function Hero() {

@@ -6,7 +6,7 @@ import {
 } from 'constants/seo';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import defaultImage from 'public/images/ahmed-w2000.jpg';
+import defaultImage from 'public/images/self/ahmed-w2000.jpg';
 
 interface SEOProps {
   title: string | undefined;
