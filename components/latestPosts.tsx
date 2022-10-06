@@ -28,7 +28,7 @@ export default function LatestPosts({ posts }: { posts: PostType[] }) {
       </div>
       <div className='mt-4 block sm:grid sm:grid-cols-2 sm:gap-x-4 md:mt-10 md:grid-cols-3'>
         {posts.map((post) => (
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/blog/${post.slug}`} key={post.slug}>
             <a className='latest-posts-card mb-4 block sm:mb-0'>
               <div className='rounded bg-offWhite p-2 dark:bg-[#141e65]'>
                 <h3 className='mb-4 text-xl font-semibold'>{post.title}</h3>
