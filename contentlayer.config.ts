@@ -7,14 +7,15 @@ import {
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeCodeTitles from 'rehype-code-titles';
-import rehypePrism from 'rehype-prism-plus/.';
+import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import { slugify } from './utils/slugify';
 
 const Image = defineNestedType(() => ({
   name: 'Image',
   fields: {
-    url: { type: 'string', description: 'Featured image url', required: true },
+    path: { type: 'string', description: 'Featured image url', required: true },
     creator: {
       type: 'string',
       description: 'Creator of the featured image',
@@ -28,9 +29,19 @@ const Image = defineNestedType(() => ({
   }
 }));
 
+const EmbeddedImagesLocal = defineNestedType(() => ({
+  name: 'EmbeddedImagesLocal',
+  fields: {
+    paths: {
+      type: 'list',
+      of: { type: 'string' }
+    }
+  }
+}));
+
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: 'posts/**/*.mdx',
+  filePathPattern: '**/*.mdx',
   contentType: 'mdx',
   fields: {
     title: {
@@ -45,7 +56,8 @@ export const Post = defineDocumentType(() => ({
     },
     image: {
       type: 'nested',
-      of: Image
+      of: Image,
+      required: true
     },
     publishedAt: {
       type: 'string',
@@ -56,6 +68,10 @@ export const Post = defineDocumentType(() => ({
       type: 'boolean',
       description: 'Is page published or just a draft',
       required: true
+    },
+    embeddedImagesLocal: {
+      type: 'nested',
+      of: EmbeddedImagesLocal
     }
   },
   computedFields: {
@@ -69,12 +85,12 @@ export const Post = defineDocumentType(() => ({
     },
     slug: {
       type: 'string',
-      resolve: (doc: any) => doc._raw.sourceFilename.replace(/\.mdx$/, '')
+      resolve: (doc: any) => slugify(doc.title)
     }
   }
 }));
 
-export default makeSource({
+const contentLayerConfig = makeSource({
   contentDirPath: 'posts',
   documentTypes: [Post],
   mdx: {
@@ -94,3 +110,5 @@ export default makeSource({
     ]
   }
 });
+
+export default contentLayerConfig;
