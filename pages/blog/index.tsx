@@ -2,10 +2,10 @@ import { allPosts } from '.contentlayer/generated';
 import Layout from 'components/layout';
 import Post from 'components/post';
 import Search from 'components/search';
-import { BlogProps } from 'types';
+import { Post as PostType } from 'types';
 import { pick } from 'utils/pick';
 
-export default function Blog({ posts }: { posts: BlogProps[] }) {
+export default function Blog({ posts }: { posts: PostType[] }) {
   return (
     <Layout title='Blog'>
       <section className='mt-10 sm:mt-16'>
@@ -29,7 +29,7 @@ export default function Blog({ posts }: { posts: BlogProps[] }) {
 
 export async function getStaticProps() {
   const posts = allPosts
-    .map((post: BlogProps) =>
+    .map((post: PostType) =>
       pick(post, [
         'title',
         'description',
@@ -40,7 +40,7 @@ export async function getStaticProps() {
       ])
     )
     .sort(
-      (a: BlogProps, b: BlogProps) =>
+      (a: PostType, b: PostType) =>
         Number(new Date(b.publishedAt as string)) -
         Number(new Date(a.publishedAt as string))
     );
