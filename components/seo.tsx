@@ -18,14 +18,11 @@ interface SEOProps {
 export default function SEO({ title, description, image, article }: SEOProps) {
   const router = useRouter();
   const currentPath = router.pathname;
+  const pageTitle = title ? `${title} - Ahmed Faaid` : 'Ahmed Faaid';
 
   return (
     <Head>
-      {title ? (
-        <title>{title} - Ahmed Faaid</title>
-      ) : (
-        <title>Ahmed Faaid</title>
-      )}
+      <title>{pageTitle}</title>
       <meta name='description' content={description || defaultDescription} />
       <meta name='image' content={`${siteUrl}/${image || defaultImage}`} />
       <meta name='twitter:card' content='summary' />
