@@ -25,7 +25,7 @@ export default function Layout({
         image={image}
         article={article}
       />
-      <div className='bg-background dark:bg-background-dark'>
+      <div className='min-h-screen bg-background dark:bg-background-dark'>
         <Header />
         <div className='container pb-8'>
           <main>{children}</main>
