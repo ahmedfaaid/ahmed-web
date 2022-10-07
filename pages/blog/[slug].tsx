@@ -17,7 +17,7 @@ const mdxComponents = {
     </h3>
   ),
   p: ({ children }: { children: any }) => (
-    <p className='mb-4 font-body text-lg font-thin leading-relaxed text-black last:mb-0'>
+    <p className='mb-4 font-body text-lg font-thin leading-relaxed text-black last:mb-0 dark:text-white'>
       {children}
     </p>
   ),
@@ -43,13 +43,13 @@ export default function SinglePost({ post }: { post: any }) {
   return (
     <Layout title={post.title}>
       <h1
-        className='my-4 mx-auto w-1/2 text-center
-         font-heading text-4xl text-black sm:w-2/3 sm:text-3xl'
+        className='my-4 mx-auto text-center font-heading
+         text-4xl text-black dark:text-white sm:text-3xl md:w-3/4'
       >
         {post.title}
       </h1>
-      <div className='mx-auto mt-8 px-4 sm:w-2/3'>
-        <div className='relative mx-auto h-[32rem] w-full overflow-hidden rounded'>
+      <div className='mx-auto mt-8 px-4 md:w-3/4'>
+        <div className='relative mx-auto h-60 w-full overflow-hidden rounded sm:h-80 md:h-[32rem]'>
           <Image
             src={post.image?.path}
             alt={post.title}
@@ -57,7 +57,7 @@ export default function SinglePost({ post }: { post: any }) {
             objectFit='cover'
           />
         </div>
-        <p className='my-4 text-center font-body text-black'>
+        <p className='my-4 text-center font-body text-black dark:text-white'>
           Photo by{' '}
           <a
             href={post.image?.externalLink}
@@ -69,7 +69,7 @@ export default function SinglePost({ post }: { post: any }) {
           </a>{' '}
           on Unsplash
         </p>
-        <p className='py-6 text-center font-body text-lg font-light italic text-black'>
+        <p className='py-6 text-center font-body text-lg font-light italic text-black dark:text-offWhite'>
           {post.description}
         </p>
         <div className='mx-auto mb-4 w-full'>
