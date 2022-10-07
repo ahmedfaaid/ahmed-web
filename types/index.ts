@@ -16,3 +16,12 @@ export interface Post {
     words: number;
   };
 }
+
+export interface Project {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  deployed: string;
+  github: string;
+}
