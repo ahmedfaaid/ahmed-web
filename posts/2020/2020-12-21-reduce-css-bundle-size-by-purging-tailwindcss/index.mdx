@@ -37,12 +37,15 @@ I decided to do a little bit of research about the file sizes for the TailwindCS
 
 <br />
 
-<Image src={props.embeddedImagesLocal[0]} alt='Unpurged portfolio styles' />
+<MDXImage
+  src='/images/post/portfolio-unpurged.png'
+  alt='Unpurged portfolio styles'
+/>
 
 <br />
 
-<Image
-  src={props.embeddedImagesLocal[1]}
+<MDXImage
+  src='/images/post/sneak-unpurged.png'
   alt='Unpurged sneaker website styles'
 />
 
@@ -58,7 +61,7 @@ TailwindCSS gives you the option to purge the unused CSS that is generated so th
 
 <br />
 
-```javascript
+```js
 /* postcss.config.js */
 
 const tailwindcss = require('tailwindcss');
@@ -86,7 +89,7 @@ In the sneaker news website, I use <a href='https://www.gatsbyjs.com/plugins/gat
 
 <br />
 
-```javascript
+```js
 /* gatsby-config.js */
 
 module.exports = {
@@ -116,11 +119,17 @@ Look at these images after purging the css:
 
 <br />
 
-<Image src={props.embeddedImagesLocal[2]} alt='Purged portfolio styles' />
+<MDXImage
+  src='/images/post/portfolio-purged.png'
+  alt='Purged portfolio styles'
+/>
 
 <br />
 
-<Image src={props.embeddedImagesLocal[2]} alt='Purged sneaker website styles' />
+<MDXImage
+  src='/images/post/sneak-purged.png'
+  alt='Purged sneaker website styles'
+/>
 
 <br />
 

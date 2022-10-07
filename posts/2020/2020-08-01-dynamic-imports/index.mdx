@@ -36,7 +36,7 @@ After its all done installing, we can open the folder in our text editor.
 
 In our `/pages/index.js` file we will replace everything with the following:
 
-```javascript
+```js
 import Head from 'next/head';
 
 export default function Home() {
@@ -106,13 +106,13 @@ Now run the server using `npm run dev` and open the site in your browser at `htt
 
 Your page should look like this:
 
-<Image src={props.embeddedImagesLocal[0]} alt='Page without the chart' />
+<MDXImage src='/images/post/nossr1.png' alt='Page without the chart' />
 
 ### Chart Component
 
 Now we will create our map component. Lets create a folder called `components` and then create a file in the components folder called `MyChart.js`. Add the following to that file:
 
-```javascript
+```js
 import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 
@@ -157,20 +157,20 @@ export default function MyChart() {
 
 Lets import the chart component into `/pages/index.js` under the first import like so:
 
-```javascript
+```js
 import Head from 'next/head';
 import MyChart from '../components/MyChart';
 ```
 
 and replace
 
-```javascript
+```js
 <p>The chart goes here</p>
 ```
 
 with
 
-```javascript
+```js
 <MyChart />
 ```
 
@@ -178,20 +178,20 @@ After reloading the page, we should run into a `GET http://localhost:3000/ 500 (
 
 Lets go back to the `MyChart.js` component. We want to replace
 
-```javascript
+```js
 import Chart from 'react-apexcharts';
 ```
 
 with
 
-```javascript
+```js
 import dynamic from 'next/dynamic';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 ```
 
 Now restart your server and reload the page in the browser. Voila! The page should look like this:
 
-<Image src={props.embeddedImagesLocal[0]} alt='Page with the chart' />
+<MDXImage src='/images/post/nossr2.png' alt='Page with the chart' />
 
 ### Conclusion
 
