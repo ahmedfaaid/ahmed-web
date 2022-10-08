@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-// import Header from './header';
 import Navbar from './navbar';
 import SEO from './seo';
 
