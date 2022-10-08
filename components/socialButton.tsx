@@ -16,7 +16,7 @@ export default function SocialButton({
           ? 'https://twitter.com/mr_amed'
           : 'https://github.com/ahmedfaaid'
       }
-      className={`flex items-center text-4xl p-4 rounded dark:hover:bg-[#161e66] hover:bg-[#eaecfa] dark:text-white transition-colors duration-300 ease-in-out ${spacing}`}
+      className={`flex items-center rounded p-4 text-2xl transition-colors duration-300 ease-in-out hover:bg-[#eaecfa] dark:text-white dark:hover:bg-[#161e66] sm:text-4xl ${spacing}`}
       target='_blank'
       rel='noreferrer noopener'
     >
@@ -28,7 +28,7 @@ export default function SocialButton({
         }
       />
       {showLabel && (
-        <span className='ml-2 text-2xl'>
+        <span className='ml-2 text-xl sm:text-2xl'>
           {name === 'twitter' ? 'mr_amed' : 'ahmedfaaid'}
         </span>
       )}
