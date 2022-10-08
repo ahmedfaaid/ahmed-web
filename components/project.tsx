@@ -3,14 +3,19 @@ import { Project as ProjectType } from 'types';
 
 export default function Project({ project }: { project: ProjectType }) {
   return (
-    <div className='card m-auto rounded bg-white p-3 text-center shadow-md dark:bg-[#232324]'>
+    <div className='card m-auto h-[26rem] rounded bg-white p-3 text-center shadow-md dark:bg-[#232324] md:w-full lg:w-4/5'>
       <a
         href={project.deployed}
         target='_blank'
         rel='noreferrer noopener'
         className='relative block h-40 w-full'
       >
-        <Image src={project.image} alt={project.name} layout='fill' />
+        <Image
+          src={project.image}
+          alt={project.name}
+          layout='fill'
+          objectFit='contain'
+        />
       </a>
       <a href={project.deployed} target='_blank' rel='noreferrer noopener'>
         <h2 className='my-5 text-center text-xl text-black dark:text-white'>
