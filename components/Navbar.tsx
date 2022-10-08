@@ -20,8 +20,8 @@ export default function Navbar() {
   };
 
   return (
-    <nav className='py-6 w-full'>
-      <div className='container px-4 sm:px-0 flex justify-between items-center'>
+    <nav className='w-full py-6'>
+      <div className='container flex items-center justify-between px-4 sm:px-0'>
         <div>
           <h1 className='text-4xl font-bold'>
             <Link href='/'>
@@ -31,11 +31,11 @@ export default function Navbar() {
             </Link>
           </h1>
         </div>
-        <div className='flex md:items-center relative'>
+        <div className='relative flex md:items-center'>
           <ul
-            className={`md:flex text-2xl font-light ${
+            className={`text-2xl font-light md:flex ${
               menuOpen ? 'block' : 'hidden'
-            } w-max absolute z-20 md:static bg-primary md:bg-transparent top-20 right-0 p-4 rounded text-white md:text-black dark:md:text-white`}
+            } absolute top-20 right-0 z-20 w-max rounded bg-primary p-4 text-white md:static md:bg-transparent md:text-black dark:md:text-white`}
           >
             <li className='mb-5 md:mb-0 md:mr-5'>
               <Link href='/blog'>
@@ -44,7 +44,7 @@ export default function Navbar() {
                     currentRoute.includes('/blog')
                       ? 'border-b md:border-primary md:text-primary'
                       : ''
-                  } hover:border-b md:hover:border-primary md:hover:text-primary transition-colors duration-300 ease-in-out`}
+                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
                 >
                   Blog
                 </a>
@@ -57,7 +57,7 @@ export default function Navbar() {
                     currentRoute.includes('/projects')
                       ? 'border-b md:border-primary md:text-primary'
                       : ''
-                  } hover:border-b md:hover:border-primary md:hover:text-primary transition-colors duration-300 ease-in-out`}
+                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
                 >
                   Projects
                 </a>
@@ -70,7 +70,7 @@ export default function Navbar() {
                     currentRoute.includes('/about')
                       ? 'border-b md:border-primary md:text-primary'
                       : ''
-                  } hover:border-b md:hover:border-primary md:hover:text-primary transition-colors duration-300 ease-in-out`}
+                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
                 >
                   About
                 </a>
@@ -83,9 +83,9 @@ export default function Navbar() {
                     currentRoute.includes('/lets-talk')
                       ? 'border-b md:border-primary md:text-primary'
                       : ''
-                  } hover:border-b md:hover:border-primary md:hover:text-primary transition-colors duration-300 ease-in-out`}
+                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
                 >
-                  Let's Talk!
+                  Let&apos;s Talk!
                 </a>
               </Link>
             </li>
@@ -98,10 +98,10 @@ export default function Navbar() {
               mounted={mounted}
             />
           </div>
-          <div className='block md:hidden z-20 ml-4'>
+          <div className='z-20 ml-4 block md:hidden'>
             {/* Hamburger icon */}
             <button
-              className='p-2 border rounded text-primary border-primary dark:text-white dark:border-white outline-none focus:outline-none'
+              className='rounded border border-primary p-2 text-primary outline-none focus:outline-none dark:border-white dark:text-white'
               onClick={openMenu}
             >
               {menuOpen ? (
@@ -111,7 +111,7 @@ export default function Navbar() {
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
                   stroke='currentColor'
-                  className='w-6 h-6'
+                  className='h-6 w-6'
                 >
                   <path
                     strokeLinecap='round'
@@ -126,7 +126,7 @@ export default function Navbar() {
                   viewBox='0 0 24 24'
                   strokeWidth={1.5}
                   stroke='currentColor'
-                  className='w-6 h-6'
+                  className='h-6 w-6'
                 >
                   <path
                     strokeLinecap='round'
