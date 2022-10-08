@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Navbar from './navbar';
+import Header from './header';
 import SEO from './seo';
 
 interface LayoutProps {
@@ -26,9 +26,7 @@ export default function Layout({
         article={article}
       />
       <div className='min-h-screen bg-background dark:bg-background-dark'>
-        <header>
-          <Navbar />
-        </header>
+        <Header />
         <div className='container pb-8'>
           <main>{children}</main>
         </div>
