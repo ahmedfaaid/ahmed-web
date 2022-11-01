@@ -6,7 +6,9 @@ const nextConfig = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['localhost']
+    domains: ['localhost'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
   }
 });
 
