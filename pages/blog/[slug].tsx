@@ -82,7 +82,7 @@ export default function SinglePost({ post }: { post: any }) {
 
 export async function getStaticPaths() {
   return {
-    paths: allPosts.map((post) => ({
+    paths: allPosts.map(post => ({
       params: { slug: post.slug }
     })),
     fallback: false
@@ -90,7 +90,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const post = allPosts.find(post => post.slug === params.slug);
 
   return {
     props: { post }
