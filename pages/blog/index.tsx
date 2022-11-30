@@ -10,6 +10,8 @@ export default function Blog({ posts }: { posts: PostType[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [postsToDisplay, setPostsToDisplay] = useState<PostType[] | null>(null);
 
+  console.log(posts);
+
   useEffect(() => {
     if (!searchQuery) {
       setPostsToDisplay(posts);
@@ -18,11 +20,13 @@ export default function Blog({ posts }: { posts: PostType[] }) {
         const title = post.title.toLowerCase();
         const desc = post.description.toLowerCase();
         const slug = post.slug.toLowerCase();
+        const content = post.body?.raw.toLowerCase();
 
         return (
           title.includes(searchQuery.toLowerCase()) ||
           desc.includes(searchQuery.toLowerCase()) ||
-          slug.includes(searchQuery.toLowerCase())
+          slug.includes(searchQuery.toLowerCase()) ||
+          content?.includes(searchQuery.toLowerCase())
         );
       });
       setPostsToDisplay(displayedPosts);
@@ -59,7 +63,8 @@ export async function getStaticProps() {
         'slug',
         'publishedAt',
         'image',
-        'readingTime'
+        'readingTime',
+        'body'
       ])
     )
     .sort(
