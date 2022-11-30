@@ -1,4 +1,11 @@
-export default function Search() {
+import { Dispatch, SetStateAction } from 'react';
+
+interface SearchProps {
+  setSearchQuery: Dispatch<SetStateAction<string>>;
+  query: string;
+}
+
+export default function Search({ setSearchQuery, query }: SearchProps) {
   return (
     <div className='flex w-full justify-center px-4 sm:px-0'>
       <div className='relative w-[32rem]'>
@@ -6,6 +13,8 @@ export default function Search() {
           type='search'
           className='w-full rounded-full py-4 pr-4 pl-14'
           placeholder='Search posts'
+          onChange={e => setSearchQuery(e.target.value)}
+          value={query}
         />
         <svg
           xmlns='http://www.w3.org/2000/svg'
