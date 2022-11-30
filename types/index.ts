@@ -2,6 +2,10 @@ export interface Post {
   title: string;
   description: string;
   slug: string;
+  body?: {
+    raw: string;
+    code: string;
+  };
   publishedAt: string;
   image: {
     path: string;
