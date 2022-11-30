@@ -10,8 +10,6 @@ export default function Blog({ posts }: { posts: PostType[] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [postsToDisplay, setPostsToDisplay] = useState<PostType[] | null>(null);
 
-  console.log(posts);
-
   useEffect(() => {
     if (!searchQuery) {
       setPostsToDisplay(posts);
