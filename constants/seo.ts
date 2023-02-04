@@ -5,6 +5,6 @@ const defaultDescription =
 
 const siteUrl = 'https://ahmedfaaid.com';
 
-const twitterUsername = '@mr_ahmed';
+const twitterUsername = '@mr_amed';
 
 export { defaultTitle, defaultDescription, siteUrl, twitterUsername };
