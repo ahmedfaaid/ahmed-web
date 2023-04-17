@@ -40,6 +40,7 @@ const handler = async (req: ContactReq, res: NextApiResponse) => {
       };
 
       await apiInstance.sendTransacEmail(sendSmtpEmail);
+      return res.status(200).json({ message: 'Email sent' });
     } catch (error: any) {
       console.log({ error: JSON.stringify(error, null, 4) });
       return res.status(400).json({ message: error.message });

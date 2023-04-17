@@ -1,4 +1,6 @@
+import CheckCircle from 'components/checkCircle';
 import Layout from 'components/layout';
+import { useRouter } from 'next/router';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Contact as ContactType } from 'types';
 import { submitContactForm } from 'utils/api';
@@ -17,7 +19,9 @@ export default function Contact() {
     subject: false,
     message: false
   });
+  const [emailSent, setEmailSent] = useState(false);
   const errors = validate(touched, formFields);
+  const router = useRouter();
 
   const formChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,9 +32,17 @@ export default function Contact() {
     }));
   };
 
-  const submitForm = (event: FormEvent) => {
+  const submitForm = async (event: FormEvent) => {
     event.preventDefault();
-    submitContactForm(formFields);
+    const sendEmail = await submitContactForm(formFields);
+
+    if (sendEmail.message === 'Email sent') {
+      setEmailSent(true);
+
+      // setTimeout(() => {
+      //   router.push('/');
+      // }, 2500);
+    }
   };
 
   const onBlur = (
@@ -44,7 +56,14 @@ export default function Contact() {
 
   return (
     <Layout title='Contact'>
-      <section className='mt-10 md:mt-24'>
+      <section className='mt-6 md:mt-24'>
+        {emailSent ? (
+          <p className='mb-4 text-center text-white'>
+            Your email has been sent
+          </p>
+        ) : (
+          <p className='mb-4'></p>
+        )}
         <div className='mx-auto w-full px-4 sm:w-2/3 sm:px-0 md:w-1/2'>
           <form
             name='contact'
@@ -146,9 +165,14 @@ export default function Contact() {
             <div>
               <button
                 type='submit'
-                className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3]'
+                className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3] disabled:bg-[rgba(44,60,204,0.4)]'
+                disabled={emailSent}
               >
-                Send
+                {emailSent ? (
+                  <CheckCircle className='mx-auto' />
+                ) : (
+                  <span>Send</span>
+                )}
               </button>
             </div>
           </form>
