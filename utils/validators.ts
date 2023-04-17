@@ -1,6 +1,5 @@
 export const validateEmail = (email: string) => {
   const comp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  console.log(comp.test(email.trim()));
   return comp.test(email.trim());
 };
 
