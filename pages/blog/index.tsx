@@ -1,24 +1,28 @@
-import { allPosts } from '.contentlayer/generated';
 import Layout from 'components/layout';
 import Post from 'components/post';
 import Search from 'components/search';
 import { useEffect, useState } from 'react';
-import { Post as PostType } from 'types';
-import { pick } from 'utils/pick';
+import readingTime from 'reading-time';
+import { BlogPost } from 'types';
+import { getPosts } from 'utils/getPosts';
 
-export default function Blog({ posts }: { posts: PostType[] }) {
+interface BlogProps {
+  posts: BlogPost[];
+}
+
+export default function Blog({ posts }: BlogProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [postsToDisplay, setPostsToDisplay] = useState<PostType[] | null>(null);
+  const [postsToDisplay, setPostsToDisplay] = useState<BlogPost[] | null>(null);
 
   useEffect(() => {
     if (!searchQuery) {
       setPostsToDisplay(posts);
     } else {
       const displayedPosts = posts.filter(post => {
-        const title = post.title.toLowerCase();
-        const desc = post.description.toLowerCase();
+        const title = post.data.title.toLowerCase();
+        const desc = post.data.description.toLowerCase();
         const slug = post.slug.toLowerCase();
-        const content = post.body?.raw.toLowerCase();
+        const content = post.content.toLowerCase();
 
         return (
           title.includes(searchQuery.toLowerCase()) ||
@@ -39,11 +43,11 @@ export default function Blog({ posts }: { posts: PostType[] }) {
           {postsToDisplay?.map(post => (
             <Post
               key={post.slug}
-              title={post.title}
+              title={post.data.title}
               slug={post.slug}
-              publishedAt={post.publishedAt}
-              image={post.image?.path}
-              readingTime={post.readingTime?.text as string}
+              publishedAt={post.data.publishedAt}
+              image={post.data.image?.path}
+              readingTime={readingTime(post.content).text}
             />
           ))}
         </div>
@@ -53,23 +57,7 @@ export default function Blog({ posts }: { posts: PostType[] }) {
 }
 
 export async function getStaticProps() {
-  const posts = allPosts
-    .map((post: PostType) =>
-      pick(post, [
-        'title',
-        'description',
-        'slug',
-        'publishedAt',
-        'image',
-        'readingTime',
-        'body'
-      ])
-    )
-    .sort(
-      (a: PostType, b: PostType) =>
-        Number(new Date(b.publishedAt as string)) -
-        Number(new Date(a.publishedAt as string))
-    );
+  const posts = await getPosts();
   return {
     props: { posts }
   };
