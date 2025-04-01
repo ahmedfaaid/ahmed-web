@@ -4,7 +4,7 @@ import Link from 'next/link';
 interface PostProps {
   title: string;
   slug: string;
-  publishedAt: string;
+  publishedAt: Date;
   image: string;
   readingTime: string;
 }
