@@ -4,25 +4,6 @@ export interface Image {
   externalLink: string;
 }
 
-export interface Post {
-  title: string;
-  description: string;
-  slug: string;
-  body?: {
-    raw: string;
-    code: string;
-  };
-  publishedAt: string;
-  image: Image;
-  published?: boolean;
-  readingTime?: {
-    text: string;
-    minutes: number;
-    time: number;
-    words: number;
-  };
-}
-
 export interface Project {
   id: string;
   name: string;
@@ -30,4 +11,23 @@ export interface Project {
   description: string;
   deployed: string;
   github: string;
+}
+
+export interface EmbeddedImagesLocal {
+  paths: string[];
+}
+
+export interface MdxData {
+  title: string;
+  description: string;
+  image: Image;
+  embeddedImagesLocal: EmbeddedImagesLocal;
+  publishedAt: Date;
+  published: boolean;
+}
+
+export interface BlogPost {
+  slug: string;
+  data: MdxData;
+  content: string;
 }
