@@ -2,12 +2,13 @@
 title: Importing a Browser Only Package Into Next.js
 description: How to import a package that only works in the browser into Next.js
 image:
-  {
-    path: '/images/post/chuttersnap-fN603qcEA7g-unsplash.jpg',
-    creator: 'chuttersnap',
-    externalLink: 'https://unsplash.com/photos/fN603qcEA7g'
-  }
-embeddedImagesLocal: { paths: ['./nossr1.png', './nossr2.png'] }
+  path: '/images/post/chuttersnap-fN603qcEA7g-unsplash.jpg'
+  creator: 'chuttersnap'
+  externalLink: 'https://unsplash.com/photos/fN603qcEA7g'
+embeddedImagesLocal:
+  paths:
+    - './nossr1.png'
+    - './nossr2.png'
 publishedAt: 2020-08-01
 published: true
 ---
@@ -89,8 +90,18 @@ export default function Home() {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+          font-family:
+            -apple-system,
+            BlinkMacSystemFont,
+            Segoe UI,
+            Roboto,
+            Oxygen,
+            Ubuntu,
+            Cantarell,
+            Fira Sans,
+            Droid Sans,
+            Helvetica Neue,
+            sans-serif;
         }
 
         * {

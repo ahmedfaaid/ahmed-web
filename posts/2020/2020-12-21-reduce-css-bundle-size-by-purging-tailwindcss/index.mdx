@@ -2,21 +2,15 @@
 title: Reduce Your CSS Bundle Size When Using TailwindCSS
 description: How to purge unused CSS when using TailwindCSS to reduce bundle size
 image:
-  {
-    path: '/images/post/ruben-bagues-ZzApzgh5lxo-unsplash.jpg',
-    creator: 'Rubén Bagüés',
-    externalLink: 'https://unsplash.com/photos/ZzApzgh5lxo'
-  }
+  path: '/images/post/ruben-bagues-ZzApzgh5lxo-unsplash.jpg'
+  creator: 'Rubén Bagüés'
+  externalLink: 'https://unsplash.com/photos/ZzApzgh5lxo'
 embeddedImagesLocal:
-  {
-    paths:
-      [
-        './portfolio-unpurged.png',
-        './sneak-unpurged.png',
-        './portfolio-purged.png',
-        './sneak-purged.png'
-      ]
-  }
+  paths:
+    - './portfolio-unpurged.png'
+    - './sneak-unpurged.png'
+    - './portfolio-purged.png'
+    - './sneak-purged.png'
 publishedAt: 2020-12-21
 published: true
 ---
@@ -73,7 +67,7 @@ module.exports = {
     process.env.NODE_ENV === 'production' &&
       require('@fullhuman/postcss-purgecss')({
         content: ['./src/**/*.js', './public/**/*.html'],
-        defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || []
+        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
       })
   ]
 };
