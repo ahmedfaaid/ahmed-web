@@ -1,3 +1,9 @@
+export interface Image {
+  path: string;
+  creator: string;
+  externalLink: string;
+}
+
 export interface Post {
   title: string;
   description: string;
@@ -7,11 +13,7 @@ export interface Post {
     code: string;
   };
   publishedAt: string;
-  image: {
-    path: string;
-    creator: string;
-    externalLink: string;
-  };
+  image: Image;
   published?: boolean;
   readingTime?: {
     text: string;
