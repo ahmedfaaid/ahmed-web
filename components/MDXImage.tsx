@@ -5,10 +5,10 @@ interface MDXImageProps {
   alt: string;
 }
 
-export default function MDXImage({ src, alt }: MDXImageProps) {
+export default function MDXImage({ src, alt, ...props }: MDXImageProps) {
   return (
     <div className='relative mx-auto h-60 w-full sm:h-80 md:h-[32rem]'>
-      <Image src={src} alt={alt} layout='fill' objectFit='cover' />
+      <Image src={src} alt={alt} fill unoptimized {...props} />
     </div>
   );
 }
