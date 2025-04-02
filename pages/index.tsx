@@ -1,11 +1,10 @@
-import { allPosts } from '.contentlayer/generated';
 import Hero from 'components/hero';
 import LatestPosts from 'components/latestPosts';
 import Layout from 'components/layout';
-import { Post as PostType } from 'types';
-import { pick } from 'utils/pick';
+import { BlogPost } from 'types';
+import { getPosts } from 'utils/getPosts';
 
-export default function Home({ posts }: { posts: PostType[] }) {
+export default function Home({ posts }: { posts: BlogPost[] }) {
   return (
     <Layout>
       <section className='mt-10 sm:mt-24'>
@@ -19,15 +18,7 @@ export default function Home({ posts }: { posts: PostType[] }) {
 }
 
 export async function getStaticProps() {
-  const posts = allPosts
-    .map((post: PostType) =>
-      pick(post, ['title', 'description', 'slug', 'readingTime'])
-    )
-    .sort(
-      (a: PostType, b: PostType) =>
-        Number(new Date(b.publishedAt as string)) -
-        Number(new Date(a.publishedAt as string))
-    );
+  const posts = await getPosts();
   return {
     props: { posts }
   };

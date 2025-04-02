@@ -25,9 +25,7 @@ export default function Navbar() {
         <div>
           <h1 className='text-4xl font-bold'>
             <Link href='/'>
-              <a>
-                ahmed<span className='text-primary'>.F</span>
-              </a>
+              ahmed<span className='text-primary'>.F</span>
             </Link>
           </h1>
         </div>
@@ -38,55 +36,51 @@ export default function Navbar() {
             } absolute top-20 right-0 z-20 w-max rounded bg-primary p-4 text-white md:static md:bg-transparent md:text-black dark:md:text-white`}
           >
             <li className='mb-5 md:mb-0 md:mr-5'>
-              <Link href='/blog'>
-                <a
-                  className={`pb-2 ${
-                    currentRoute.includes('/blog')
-                      ? 'border-b md:border-primary md:text-primary'
-                      : ''
-                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
-                >
-                  Blog
-                </a>
+              <Link
+                href='/blog'
+                className={`pb-2 ${
+                  currentRoute.includes('/blog')
+                    ? 'border-b md:border-primary md:text-primary'
+                    : ''
+                } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+              >
+                Blog
               </Link>
             </li>
             <li className='mb-5 md:mb-0 md:mr-5'>
-              <Link href='/projects'>
-                <a
-                  className={`pb-2 ${
-                    currentRoute.includes('/projects')
-                      ? 'border-b md:border-primary md:text-primary'
-                      : ''
-                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
-                >
-                  Projects
-                </a>
+              <Link
+                href='/projects'
+                className={`pb-2 ${
+                  currentRoute.includes('/projects')
+                    ? 'border-b md:border-primary md:text-primary'
+                    : ''
+                } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+              >
+                Projects
               </Link>
             </li>
             <li className='mb-5 md:mb-0 md:mr-5'>
-              <Link href='/about'>
-                <a
-                  className={`pb-2 ${
-                    currentRoute.includes('/about')
-                      ? 'border-b md:border-primary md:text-primary'
-                      : ''
-                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
-                >
-                  About
-                </a>
+              <Link
+                href='/about'
+                className={`pb-2 ${
+                  currentRoute.includes('/about')
+                    ? 'border-b md:border-primary md:text-primary'
+                    : ''
+                } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+              >
+                About
               </Link>
             </li>
             <li>
-              <Link href='/lets-talk'>
-                <a
-                  className={`pb-2 ${
-                    currentRoute.includes('/lets-talk')
-                      ? 'border-b md:border-primary md:text-primary'
-                      : ''
-                  } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
-                >
-                  Let&apos;s Talk!
-                </a>
+              <Link
+                href='/lets-talk'
+                className={`pb-2 ${
+                  currentRoute.includes('/lets-talk')
+                    ? 'border-b md:border-primary md:text-primary'
+                    : ''
+                } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+              >
+                Let&apos;s Talk!
               </Link>
             </li>
           </ul>

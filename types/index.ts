@@ -1,24 +1,7 @@
-export interface Post {
-  title: string;
-  description: string;
-  slug: string;
-  body?: {
-    raw: string;
-    code: string;
-  };
-  publishedAt: string;
-  image: {
-    path: string;
-    creator: string;
-    externalLink: string;
-  };
-  published?: boolean;
-  readingTime?: {
-    text: string;
-    minutes: number;
-    time: number;
-    words: number;
-  };
+export interface Image {
+  path: string;
+  creator: string;
+  externalLink: string;
 }
 
 export interface Project {
@@ -30,9 +13,21 @@ export interface Project {
   github: string;
 }
 
-export interface Contact {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
+export interface EmbeddedImagesLocal {
+  paths: string[];
+}
+
+export interface MdxData {
+  title: string;
+  description: string;
+  image: Image;
+  embeddedImagesLocal: EmbeddedImagesLocal;
+  publishedAt: Date;
+  published: boolean;
+}
+
+export interface BlogPost {
+  slug: string;
+  data: MdxData;
+  content: string;
 }
