@@ -7,4 +7,9 @@ const siteUrl = 'https://ahmedfaaid.com';
 
 const twitterUsername = '@mr_amed';
 
-export { defaultTitle, defaultDescription, siteUrl, twitterUsername };
+const creator = {
+  name: 'Ahmed Faaid',
+  url: 'https://ahmedfaaid.com'
+};
+
+export { creator, defaultDescription, defaultTitle, siteUrl, twitterUsername };
