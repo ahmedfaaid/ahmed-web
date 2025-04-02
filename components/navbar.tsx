@@ -1,13 +1,15 @@
+'use client';
+
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ThemeToggler from './themeToggler';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const currentRoute = useRouter().pathname;
+  const currentRoute = usePathname();
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === 'system' ? systemTheme : theme;
 
@@ -39,7 +41,7 @@ export default function Navbar() {
               <Link
                 href='/blog'
                 className={`pb-2 ${
-                  currentRoute.includes('/blog')
+                  currentRoute === '/blog'
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
@@ -51,7 +53,7 @@ export default function Navbar() {
               <Link
                 href='/projects'
                 className={`pb-2 ${
-                  currentRoute.includes('/projects')
+                  currentRoute === '/projects'
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
@@ -63,7 +65,7 @@ export default function Navbar() {
               <Link
                 href='/about'
                 className={`pb-2 ${
-                  currentRoute.includes('/about')
+                  currentRoute === '/about'
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
@@ -75,7 +77,7 @@ export default function Navbar() {
               <Link
                 href='/lets-talk'
                 className={`pb-2 ${
-                  currentRoute.includes('/lets-talk')
+                  currentRoute === '/lets-talk'
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}

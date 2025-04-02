@@ -1,3 +1,5 @@
+'use client';
+
 import {
   defaultDescription,
   defaultTitle,
@@ -5,7 +7,7 @@ import {
   twitterUsername
 } from 'constants/seo';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import defaultImage from 'public/images/self/ahmed-w2000.jpg';
 
 interface SEOProps {
@@ -16,8 +18,7 @@ interface SEOProps {
 }
 
 export default function SEO({ title, description, image, article }: SEOProps) {
-  const router = useRouter();
-  const currentPath = router.pathname;
+  const currentPath = usePathname();
   const pageTitle = title ? `${title} - Ahmed Faaid` : 'Ahmed Faaid';
 
   return (
