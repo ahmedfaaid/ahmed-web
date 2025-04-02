@@ -1,5 +1,5 @@
+import { BlogPost } from '@/types';
 import Link from 'next/link';
-import { BlogPost } from 'types';
 
 export default function LatestPosts({ posts }: { posts: BlogPost[] }) {
   return (
