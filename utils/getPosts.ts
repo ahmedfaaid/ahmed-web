@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { readdir, readFile } from 'fs/promises';
 import matter from 'gray-matter';
 
-export async function getPosts() {
+export async function getPosts({ searchTerm }: { searchTerm?: string } = {}) {
   let currentFolder: string;
   const folders = await readdir('./posts', { withFileTypes: true });
   const subFolders = await Promise.all(
@@ -14,7 +14,7 @@ export async function getPosts() {
     })
   );
   const files = subFolders.flat();
-  const posts = await Promise.all(
+  let posts = await Promise.all(
     files.map(async file => {
       const fileContent = await readFile(
         `posts/${currentFolder}/${file.name}/index.mdx`
@@ -30,5 +30,17 @@ export async function getPosts() {
       };
     })
   );
+  if (searchTerm && searchTerm.trim() !== '') {
+    posts = posts.filter(post => {
+      const { data, content, slug } = post;
+      const search = searchTerm.toLowerCase();
+      return (
+        data.title.toLowerCase().includes(search) ||
+        data.description.toLowerCase().includes(search) ||
+        content.toLowerCase().includes(search) ||
+        slug.toLowerCase().includes(search)
+      );
+    });
+  }
   return posts;
 }
