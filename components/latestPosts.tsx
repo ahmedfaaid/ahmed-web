@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { Post as PostType } from 'types';
+import { BlogPost } from 'types';
 
-export default function LatestPosts({ posts }: { posts: PostType[] }) {
+export default function LatestPosts({ posts }: { posts: BlogPost[] }) {
   return (
     <div className='px-8 sm:px-0'>
       <div className='flex items-center justify-between'>
@@ -35,9 +35,9 @@ export default function LatestPosts({ posts }: { posts: PostType[] }) {
             className='latest-posts-card mb-4 block sm:mb-0'
           >
             <div className='rounded bg-offWhite p-2 dark:bg-[#141e65]'>
-              <h3 className='mb-4 text-xl font-semibold'>{post.title}</h3>
+              <h3 className='mb-4 text-xl font-semibold'>{post.data.title}</h3>
               <p className='text-lg italic text-black opacity-50 dark:text-offWhite dark:opacity-100'>
-                {post.description}
+                {post.data.description}
               </p>
               <button className='hovered-link mt-4 flex items-center transition-colors duration-300 ease-in-out hover:text-primary'>
                 <span className='mr-2'>Read More</span>
