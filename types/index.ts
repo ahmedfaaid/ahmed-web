@@ -22,7 +22,7 @@ export interface MdxData {
   description: string;
   image: Image;
   embeddedImagesLocal: EmbeddedImagesLocal;
-  publishedAt: Date;
+  publishedAt: string;
   published: boolean;
 }
 
