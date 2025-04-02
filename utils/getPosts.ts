@@ -1,7 +1,8 @@
+import { MdxData } from '@/types';
+import { slugify } from '@/utils/slugify';
 import { format } from 'date-fns';
 import { readdir, readFile } from 'fs/promises';
 import matter from 'gray-matter';
-import { slugify } from './slugify';
 
 export async function getPosts() {
   let currentFolder: string;
@@ -24,7 +25,7 @@ export async function getPosts() {
         data: {
           ...data,
           publishedAt: format(new Date(data.publishedAt), 'yyyy-LL-d')
-        },
+        } as MdxData,
         content
       };
     })
