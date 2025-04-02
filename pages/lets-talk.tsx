@@ -1,69 +1,178 @@
+import CheckCircle from 'components/checkCircle';
 import Layout from 'components/layout';
+import { useRouter } from 'next/router';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { Contact as ContactType } from 'types';
+import { submitContactForm } from 'utils/api';
+import { validate } from 'utils/validators';
 
 export default function Contact() {
+  const [formFields, setFormFields] = useState<ContactType>({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    subject: false,
+    message: false
+  });
+  const [emailSent, setEmailSent] = useState(false);
+  const errors = validate(touched, formFields);
+  const router = useRouter();
+
+  const formChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormFields(prev => ({
+      ...prev,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  const submitForm = async (event: FormEvent) => {
+    event.preventDefault();
+    const sendEmail = await submitContactForm(formFields);
+
+    if (sendEmail.message === 'Email sent') {
+      setEmailSent(true);
+
+      // setTimeout(() => {
+      //   router.push('/');
+      // }, 2500);
+    }
+  };
+
+  const onBlur = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setTouched(prev => ({
+      ...prev,
+      [event.target.name]: true
+    }));
+  };
+
   return (
     <Layout title='Contact'>
-      <section className='mt-10 md:mt-24'>
+      <section className='mt-6 md:mt-24'>
+        {emailSent ? (
+          <p className='mb-4 text-center text-white'>
+            Your email has been sent
+          </p>
+        ) : (
+          <p className='mb-4'></p>
+        )}
         <div className='mx-auto w-full px-4 sm:w-2/3 sm:px-0 md:w-1/2'>
-          <form name='contact' method='POST' data-netlify='true'>
+          <form
+            name='contact'
+            method='POST'
+            data-netlify='true'
+            onSubmit={submitForm}
+          >
             <div className='mb-4'>
               <label
                 htmlFor='name'
-                className='mb-1 block text-lg text-[#A2A1A1]'
+                className={`mb-1 block text-lg ${
+                  errors.name ? 'text-red-500' : 'text-[#A2A1A1]'
+                }`}
               >
                 Name
               </label>
               <input
-                type='name'
+                type='text'
+                name='name'
+                id='name'
                 placeholder='Your Name'
-                className='w-full rounded p-4'
+                className={`w-full rounded border p-4 ${
+                  errors.name ? 'border-red-500' : 'border-transparent'
+                }`}
+                onChange={formChange}
+                onBlur={onBlur}
               />
+              {errors.name && <p className='text-red-500'>{errors.name}</p>}
             </div>
             <div className='mb-4'>
               <label
                 htmlFor='email'
-                className='mb-1 block  text-lg text-[#A2A1A1]'
+                className={`mb-1 block  text-lg ${
+                  errors.email ? 'text-red-500' : 'text-[#A2A1A1]'
+                }`}
               >
                 Email
               </label>
               <input
                 type='email'
+                name='email'
+                id='email'
                 placeholder='Your Email'
-                className='w-full rounded p-4'
+                className={`w-full rounded border p-4 ${
+                  errors.email ? 'border-red-500' : 'border-transparent'
+                }`}
+                onChange={formChange}
+                onBlur={onBlur}
               />
+              {errors.email && <p className='text-red-500'>{errors.email}</p>}
             </div>
             <div className='mb-4'>
               <label
                 htmlFor='subject'
-                className='mb-1 block  text-lg text-[#A2A1A1]'
+                className={`mb-1 block text-lg ${
+                  errors.subject ? 'text-red-500' : 'text-[#A2A1A1]'
+                }`}
               >
                 Subject
               </label>
               <input
-                type='subject'
+                type='text'
+                name='subject'
+                id='subject'
                 placeholder='Subject'
-                className='w-full rounded p-4'
+                className={`w-full rounded border p-4 ${
+                  errors.subject ? 'border-red-500' : 'border-transparent'
+                }`}
+                onChange={formChange}
+                onBlur={onBlur}
               />
+              {errors.subject && (
+                <p className='text-red-500'>{errors.subject}</p>
+              )}
             </div>
             <div className='mb-4'>
               <label
                 htmlFor='message'
-                className='mb-1 block  text-lg text-[#A2A1A1]'
+                className={`mb-1 block text-lg ${
+                  errors.message ? 'text-red-500' : 'text-[#A2A1A1]'
+                }`}
               >
                 Body
               </label>
               <textarea
                 name='message'
+                id='message'
                 placeholder='Your Message'
-                className='h-60 w-full rounded p-4'
+                className={`h-60 w-full rounded border p-4 ${
+                  errors.message ? 'border-red-500' : 'border-transparent'
+                }`}
+                onChange={formChange}
+                onBlur={onBlur}
               />
+              {errors.message && (
+                <p className='text-red-500'>{errors.message}</p>
+              )}
             </div>
             <div>
               <button
                 type='submit'
-                className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3]'
+                className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3] disabled:bg-[rgba(44,60,204,0.4)]'
+                disabled={emailSent}
               >
-                Send
+                {emailSent ? (
+                  <CheckCircle className='mx-auto' />
+                ) : (
+                  <span>Send</span>
+                )}
               </button>
             </div>
           </form>
