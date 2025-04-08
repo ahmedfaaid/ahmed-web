@@ -21,11 +21,11 @@ export default function SocialButton({
       rel='noreferrer noopener'
     >
       <i
-        className={
+        className={`text-2xl ${
           name === 'twitter'
             ? 'devicon-twitter-original'
             : 'devicon-github-original'
-        }
+        }`}
       />
       {showLabel && (
         <span className='ml-2 text-xl sm:text-2xl'>
