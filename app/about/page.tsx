@@ -1,11 +1,10 @@
-import Layout from 'components/layout';
-import SocialButton from 'components/socialButton';
+import SocialButton from '@/components/socialButton';
+import Sitting from '@/public/images/hero/Saly-13.svg';
 import Image from 'next/image';
-import Sitting from 'public/images/hero/Saly-13.svg';
 
 export default function About() {
   return (
-    <Layout title='About'>
+    <>
       <section className='mt-10 md:mt-24'>
         <div className='flex flex-col px-4 sm:px-0 md:grid md:grid-cols-2'>
           <div className='flex flex-col justify-end'>
@@ -29,15 +28,10 @@ export default function About() {
             </div>
           </div>
           <div className='relative order-first h-96 md:order-none'>
-            <Image
-              src={Sitting}
-              alt='Jumping'
-              layout='fill'
-              objectFit='cover'
-            />
+            <Image src={Sitting} alt='Jumping' fill className='object-cover' />
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
