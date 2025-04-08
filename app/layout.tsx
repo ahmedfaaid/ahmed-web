@@ -99,6 +99,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' suppressHydrationWarning>
+      <head>
+        <link
+          rel='stylesheet'
+          type='text/css'
+          href='https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css'
+        />
+      </head>
       <body className={`${openSans.className} ${roboto.className}`}>
         <ThemeProvider attribute='class'>
           <div className='min-h-screen bg-background dark:bg-background-dark'>
