@@ -1,10 +1,10 @@
-import CheckCircle from 'components/checkCircle';
-import Layout from 'components/layout';
-import { useRouter } from 'next/router';
+'use client';
+
+import CheckCircle from '@/components/checkCircle';
+import { Contact as ContactType } from '@/types';
+import { validate } from '@/utils/validators';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { Contact as ContactType } from 'types';
-import { submitContactForm } from 'utils/api';
-import { validate } from 'utils/validators';
+import { BarLoader } from 'react-spinners';
 
 export default function Contact() {
   const [formFields, setFormFields] = useState<ContactType>({
@@ -19,9 +19,9 @@ export default function Contact() {
     subject: false,
     message: false
   });
+  const [sending, setSending] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const errors = validate(touched, formFields);
-  const router = useRouter();
 
   const formChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,15 +34,29 @@ export default function Contact() {
 
   const submitForm = async (event: FormEvent) => {
     event.preventDefault();
-    const sendEmail = await submitContactForm(formFields);
+    setSending(true);
 
-    if (sendEmail.message === 'Email sent') {
+    const send = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formFields)
+    });
+    const emailResponse = await send.json();
+
+    if (send.status === 200 && emailResponse.data.id) {
       setEmailSent(true);
-
-      // setTimeout(() => {
-      //   router.push('/');
-      // }, 2500);
+      setFormFields({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } else if (send.status === 500) {
+      setEmailSent(false);
     }
+    setSending(false);
   };
 
   const onBlur = (
@@ -55,7 +69,7 @@ export default function Contact() {
   };
 
   return (
-    <Layout title='Contact'>
+    <>
       <section className='mt-6 md:mt-24'>
         {emailSent ? (
           <p className='mb-4 text-center text-white'>
@@ -168,7 +182,9 @@ export default function Contact() {
                 className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3] disabled:bg-[rgba(44,60,204,0.4)]'
                 disabled={emailSent}
               >
-                {emailSent ? (
+                {sending && !emailSent ? (
+                  <BarLoader />
+                ) : !sending && emailSent ? (
                   <CheckCircle className='mx-auto' />
                 ) : (
                   <span>Send</span>
@@ -178,6 +194,6 @@ export default function Contact() {
           </form>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
