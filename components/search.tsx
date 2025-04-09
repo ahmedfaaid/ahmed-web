@@ -26,7 +26,7 @@ export default function Search() {
     if (search && search.trim() !== '') {
       setInputValue(search);
     }
-  }, []);
+  }, [search]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
