@@ -44,7 +44,7 @@ export default async function SinglePost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = (await getPosts()).find(async post => post.slug === slug);
+  const post = (await getPosts()).find(post => post.slug === slug);
 
   return (
     <>
