@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,12 +32,7 @@ export default function Post({
           />
         </div>
         <span className='text-black opacity-50 dark:text-offWhite dark:opacity-100 md:text-lg lg:text-xl'>
-          {new Date(publishedAt).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          })}{' '}
-          - {readingTime}
+          {format(new Date(publishedAt), 'MMM d, yyyy')} - {readingTime}
         </span>
         <h3 className='mt-5 text-2xl'>{title}</h3>
       </Link>
