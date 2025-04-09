@@ -41,9 +41,10 @@ const mdxComponents = {
 export default async function SinglePost({
   params
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = (await getPosts()).find(post => post.slug === params.slug);
+  const { slug } = await params;
+  const post = (await getPosts()).find(async post => post.slug === slug);
 
   return (
     <>
@@ -106,11 +107,8 @@ export default async function SinglePost({
   );
 }
 
-export const getStaticPaths = async () => {
-  return {
-    paths: (await getPosts()).map(post => ({
-      params: { slug: post.slug }
-    })),
-    fallback: false
-  };
-};
+export async function generateStaticParams() {
+  return (await getPosts()).map(post => ({
+    slug: post.slug
+  }));
+}
