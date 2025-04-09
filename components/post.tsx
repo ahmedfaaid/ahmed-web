@@ -26,9 +26,8 @@ export default function Post({
           <Image
             src={image}
             alt={title}
-            layout='fill'
-            objectFit='cover'
-            objectPosition='center'
+            fill
+            className='object-cover object-center'
           />
         </div>
         <span className='text-black opacity-50 dark:text-offWhite dark:opacity-100 md:text-lg lg:text-xl'>
