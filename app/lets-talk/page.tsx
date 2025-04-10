@@ -47,6 +47,12 @@ export default function Contact() {
 
     if (send.status === 200 && emailResponse.data.id) {
       setEmailSent(true);
+      setTouched({
+        name: false,
+        email: false,
+        subject: false,
+        message: false
+      });
       setFormFields({
         name: '',
         email: '',
