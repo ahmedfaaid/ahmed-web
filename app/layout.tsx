@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from 'components/header';
 import {
   creator,
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <main>{children}</main>
             </div>
           </div>
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
