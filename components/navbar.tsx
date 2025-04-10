@@ -45,6 +45,7 @@ export default function Navbar() {
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+                onClick={() => setMenuOpen(false)}
               >
                 Blog
               </Link>
@@ -57,6 +58,7 @@ export default function Navbar() {
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+                onClick={() => setMenuOpen(false)}
               >
                 Projects
               </Link>
@@ -69,6 +71,7 @@ export default function Navbar() {
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+                onClick={() => setMenuOpen(false)}
               >
                 About
               </Link>
@@ -81,6 +84,7 @@ export default function Navbar() {
                     ? 'border-b md:border-primary md:text-primary'
                     : ''
                 } transition-colors duration-300 ease-in-out hover:border-b md:hover:border-primary md:hover:text-primary`}
+                onClick={() => setMenuOpen(false)}
               >
                 Let&apos;s Talk!
               </Link>
