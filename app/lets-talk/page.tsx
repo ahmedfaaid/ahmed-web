@@ -185,7 +185,7 @@ export default function Contact() {
             <div>
               <button
                 type='submit'
-                className='w-40 rounded bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3] disabled:bg-[rgba(44,60,204,0.4)]'
+                className='w-40 rounded-sm bg-primary p-2 text-lg text-white transition-colors duration-300 ease-in-out hover:bg-[#2330a3] disabled:bg-[rgba(44,60,204,0.4)]'
                 disabled={emailSent}
               >
                 {sending && !emailSent ? (

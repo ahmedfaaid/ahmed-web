@@ -14,7 +14,7 @@ export default function ThemeToggler({
   if (currentTheme === 'dark') {
     return (
       <button
-        className='p-2 border rounded hover:bg-[#121852] transition-colors duration-300 ease-in-out'
+        className='p-2 border rounded-sm hover:bg-[#121852] transition-colors duration-300 ease-in-out'
         onClick={() => setTheme('light')}
       >
         <svg
@@ -36,7 +36,7 @@ export default function ThemeToggler({
   } else {
     return (
       <button
-        className='p-2 border rounded hover:bg-[#eaecfa] transition-colors duration-300 ease-in-out'
+        className='p-2 border rounded-sm hover:bg-[#eaecfa] transition-colors duration-300 ease-in-out'
         onClick={() => setTheme('dark')}
       >
         <svg

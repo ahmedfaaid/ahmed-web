@@ -55,7 +55,7 @@ export default async function SinglePost({
         {post?.data.title}
       </h1>
       <div className='mx-auto mt-8 px-4 md:w-3/4'>
-        <div className='relative mx-auto h-60 w-full overflow-hidden rounded sm:h-80 md:h-[32rem]'>
+        <div className='relative mx-auto h-60 w-full overflow-hidden rounded-sm sm:h-80 md:h-[32rem]'>
           <Image
             src={post?.data.image?.path as string}
             alt={post?.data.title as string}

@@ -34,7 +34,7 @@ export default function LatestPosts({ posts }: { posts: BlogPost[] }) {
             key={post.slug}
             className='latest-posts-card mb-4 block sm:mb-0'
           >
-            <div className='rounded bg-offWhite p-2 dark:bg-[#141e65]'>
+            <div className='rounded-sm bg-offWhite p-2 dark:bg-[#141e65]'>
               <h3 className='mb-4 text-xl font-semibold'>{post.data.title}</h3>
               <p className='text-lg italic text-black opacity-50 dark:text-offWhite dark:opacity-100'>
                 {post.data.description}
