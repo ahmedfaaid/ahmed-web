@@ -105,7 +105,7 @@ export default function Contact() {
                 name='name'
                 id='name'
                 placeholder='Your Name'
-                className={`w-full rounded border p-4 ${
+                className={`w-full rounded border p-4 bg-white dark:bg-zinc-900 ${
                   errors.name ? 'border-red-500' : 'border-transparent'
                 }`}
                 onChange={formChange}
@@ -127,7 +127,7 @@ export default function Contact() {
                 name='email'
                 id='email'
                 placeholder='Your Email'
-                className={`w-full rounded border p-4 ${
+                className={`w-full rounded border p-4 bg-white dark:bg-zinc-900 ${
                   errors.email ? 'border-red-500' : 'border-transparent'
                 }`}
                 onChange={formChange}
@@ -149,7 +149,7 @@ export default function Contact() {
                 name='subject'
                 id='subject'
                 placeholder='Subject'
-                className={`w-full rounded border p-4 ${
+                className={`w-full rounded border p-4 bg-white dark:bg-zinc-900 ${
                   errors.subject ? 'border-red-500' : 'border-transparent'
                 }`}
                 onChange={formChange}
@@ -172,7 +172,7 @@ export default function Contact() {
                 name='message'
                 id='message'
                 placeholder='Your Message'
-                className={`h-60 w-full rounded border p-4 ${
+                className={`h-60 w-full rounded border p-4 bg-white dark:bg-zinc-900 ${
                   errors.message ? 'border-red-500' : 'border-transparent'
                 }`}
                 onChange={formChange}
