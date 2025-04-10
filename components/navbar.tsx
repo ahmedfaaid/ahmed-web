@@ -101,7 +101,7 @@ export default function Navbar() {
           <div className='z-20 ml-4 block md:hidden'>
             {/* Hamburger icon */}
             <button
-              className='rounded border border-primary p-2 text-primary outline-none focus:outline-none dark:border-white dark:text-white'
+              className='rounded-sm border border-primary p-2 text-primary outline-hidden focus:outline-hidden dark:border-white dark:text-white'
               onClick={openMenu}
             >
               {menuOpen ? (

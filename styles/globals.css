@@ -1,17 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer utilities {
-  .blog-post-card .hovered-image {
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-heading: Open-Sans, sans-serif;
+  --font-body: Roboto, sans-serif;
+
+  --color-primary: #2c3ccc;
+
+  --color-background: #f6f6f6;
+  --color-background-dark: #040614;
+
+  --color-off-white: #e5e5e5;
+  --color-light-black: #d9d9d9;
+
+  --color-twitter-blue: #1da1f2;
+  --color-twitter-white: #f5f8fa;
+
+  --color-github-white: #fafafa;
+  --color-github-dark: #333;
+
+  --inset-1\/2: 50%;
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility blog-post-card {
+  & .hovered-image {
     border: 3px solid transparent;
   }
 
-  .blog-post-card:hover .hovered-image {
+  &:hover .hovered-image {
     @apply border-primary;
   }
+}
 
-  .latest-posts-card:hover .hovered-link {
+@utility hovered-image {
+  .blog-post-card & {
+    border: 3px solid transparent;
+  }
+
+  .blog-post-card:hover & {
+    @apply border-primary;
+  }
+}
+
+@utility latest-posts-card {
+  &:hover .hovered-link {
+    @apply text-primary;
+  }
+}
+
+@utility hovered-link {
+  .latest-posts-card:hover & {
     @apply text-primary;
   }
 }

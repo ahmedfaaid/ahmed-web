@@ -16,7 +16,7 @@ export default function SocialButton({
           ? 'https://twitter.com/mr_amed'
           : 'https://github.com/ahmedfaaid'
       }
-      className={`flex items-center rounded p-4 text-2xl transition-colors duration-300 ease-in-out hover:bg-[#eaecfa] dark:text-white dark:hover:bg-[#161e66] sm:text-4xl ${spacing}`}
+      className={`flex items-center rounded-sm p-4 text-2xl transition-colors duration-300 ease-in-out hover:bg-[#eaecfa] dark:text-white dark:hover:bg-[#161e66] sm:text-4xl ${spacing}`}
       target='_blank'
       rel='noreferrer noopener'
     >
