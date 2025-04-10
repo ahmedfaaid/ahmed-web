@@ -43,7 +43,7 @@ export default function Search() {
         <div className='relative'>
           <input
             type='search'
-            className='w-full rounded-full py-4 pr-4 pl-14'
+            className='w-full rounded-full py-4 pr-4 pl-14 bg-white dark:bg-stone-800'
             placeholder='Search posts'
             onChange={handleChange}
             value={inputValue}
