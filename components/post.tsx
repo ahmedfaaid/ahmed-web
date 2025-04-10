@@ -31,7 +31,7 @@ export default function Post({
             className='object-cover object-center'
           />
         </div>
-        <span className='text-black opacity-50 dark:text-offWhite dark:opacity-100 md:text-lg lg:text-xl'>
+        <span className='text-black opacity-50 dark:text-off-white dark:opacity-100 md:text-lg lg:text-xl'>
           {format(new Date(publishedAt), 'MMM d, yyyy')} - {readingTime}
         </span>
         <h3 className='mt-5 text-2xl'>{title}</h3>
