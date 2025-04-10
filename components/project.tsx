@@ -23,7 +23,7 @@ export default function Project({ project }: { project: ProjectType }) {
         </h2>
       </a>
       <a href={project.deployed} target='_blank' rel='noreferrer noopener'>
-        <p className='text-center italic text-black dark:text-offWhite'>
+        <p className='text-center italic text-black dark:text-off-white'>
           {project.description}
         </p>
       </a>
