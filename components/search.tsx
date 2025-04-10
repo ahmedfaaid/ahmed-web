@@ -39,8 +39,8 @@ export default function Search() {
 
   return (
     <div className='flex w-full justify-center px-4 sm:px-0'>
-      <form onSubmit={handleSubmit}>
-        <div className='relative w-[32rem]'>
+      <form onSubmit={handleSubmit} className='w-full sm:w-[32rem] mx-auto'>
+        <div className='relative'>
           <input
             type='search'
             className='w-full rounded-full py-4 pr-4 pl-14'
