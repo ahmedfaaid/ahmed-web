@@ -75,7 +75,7 @@ export default async function SinglePost({
           </a>{' '}
           on Unsplash
         </p>
-        <p className='py-6 text-center font-body text-lg font-light italic text-black dark:text-offWhite'>
+        <p className='py-6 text-center font-body text-lg font-light italic text-black dark:text-off-white'>
           {post?.data.description}
         </p>
         <div className='mx-auto mb-4 w-full'>
