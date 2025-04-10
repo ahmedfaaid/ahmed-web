@@ -3,21 +3,24 @@ import { slugify } from '@/utils/slugify';
 import { format } from 'date-fns';
 import { readdir, readFile } from 'fs/promises';
 import matter from 'gray-matter';
+import path from 'path';
+
+const POSTS_PATH = path.join(process.cwd(), 'posts');
 
 export async function getPosts({ searchTerm }: { searchTerm?: string } = {}) {
   let currentFolder: string;
-  const folders = await readdir('./posts', { withFileTypes: true });
+  const folders = await readdir(POSTS_PATH, { withFileTypes: true });
   const subFolders = await Promise.all(
     folders.map(folder => {
       currentFolder = folder.name;
-      return readdir(`./posts/${folder.name}`, { withFileTypes: true });
+      return readdir(`${POSTS_PATH}/${folder.name}`, { withFileTypes: true });
     })
   );
   const files = subFolders.flat();
   let posts = await Promise.all(
     files.map(async file => {
       const fileContent = await readFile(
-        `posts/${currentFolder}/${file.name}/index.mdx`
+        `${POSTS_PATH}/${currentFolder}/${file.name}/index.mdx`
       );
       const { data, content } = matter(fileContent);
       return {
